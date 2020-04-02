@@ -1,1 +1,8 @@
 ﻿gbt32960parser/.vs
+gbt32960parser/.pylint.d
+gbt32960parser/__pycache__
+gbt32960parser/oldscript
+gbt32960parser/sort_0327
+gbt32960parser/oldcompletefiles
+gbt32960parser/*.csv
+gbt32960parser/*.log
