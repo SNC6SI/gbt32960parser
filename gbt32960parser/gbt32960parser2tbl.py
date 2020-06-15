@@ -288,7 +288,7 @@ class gbt32960parser:
         # ================================================================================
         df_vehst = pd.DataFrame(self.Info_1[:,0],columns=['vehst'])
         df_chrgst = pd.DataFrame(self.Info_1[:,1],columns=['chrgst'])
-        df_vel = pd.DataFrame(self.Info_1[:,3],columns=['vel'])
+        df_vel = pd.DataFrame(self.Info_1[:,3].astype(np.float32)/10.0,columns=['vel'])
         df_odo = pd.DataFrame(self.Info_1[:,4].astype(np.float32)/10.0,columns=['odo'])
         df_packU = pd.DataFrame(self.Info_1[:,5].astype(np.float32)/10.0,columns=['packU'])
         df_packI = pd.DataFrame(self.Info_1[:,6].astype(np.float32)/10.0-1000.0,columns=['packI'])
