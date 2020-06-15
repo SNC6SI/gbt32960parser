@@ -342,8 +342,8 @@ class gbt32960parser:
                              df_U_Hi,df_U_Lo,df_U_HiN,df_U_LoN,
                              df_T_Hi,df_T_Lo,df_T_HiN,df_T_LoN,                             
                              df_soc, df_cellU, df_cellT], axis=1)
-        self.df.sort_values(by='time', inplace=True)
-        self.df.reset_index(drop=True, inplace=True)
+        self.df.sort_values(by='time', inplace=True, ignore_index=True)
+        # self.df.reset_index(drop=True, inplace=True)
         
 
 if __name__ == '__main__':
