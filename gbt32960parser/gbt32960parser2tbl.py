@@ -25,12 +25,6 @@ class gbt32960parser:
         self.cellUNum = 0
         self.cellTNum = 0
 
-#        with gzip.open(filename, 'r') as f:
-#            for line in f:
-#                line = line.decode()
-#                msg = line.split(',')[2]
-#                self.rawtxtlist.append(msg)
-        print(filename)
         try:
             msg = pd.read_csv(filename, compression='gzip', header=None)
             #msg = pd.read_csv(filename, header=None)
@@ -292,6 +286,7 @@ class gbt32960parser:
         df_odo = pd.DataFrame(self.Info_1[:,4].astype(np.float32)/10.0,columns=['odo'])
         df_packU = pd.DataFrame(self.Info_1[:,5].astype(np.float32)/10.0,columns=['packU'])
         df_packI = pd.DataFrame(self.Info_1[:,6].astype(np.float32)/10.0-1000.0,columns=['packI'])
+        df_IR = pd.DataFrame(self.Info_1[:, 10].astype(np.float32), columns=['IR'])
         
         df_TMst = pd.DataFrame(self.Info_2[:,2],columns=['TMst'])
         df_TMn = pd.DataFrame(self.Info_2[:,4]-20000,columns=['TMn'])
@@ -337,6 +332,7 @@ class gbt32960parser:
         # concat
         self.df = pd.concat([df_time, 
                              df_vehst,df_chrgst,df_vel,df_odo,df_packU,df_packI,
+                             df_IR,
                              df_TMst,df_TMn,df_TMtrq,df_MCUT,df_TMT,
                              df_posLong,df_posLati,
                              df_U_Hi,df_U_Lo,df_U_HiN,df_U_LoN,
@@ -349,7 +345,7 @@ class gbt32960parser:
 if __name__ == '__main__':
 
     #a = gbt32960parser(r'D:\OBS\data201903\LA9AB2AC6H0LDN511\detail_data-r-00000.gz')
-    a = gbt32960parser(r'D:\85_obs\data201903\LA9AB2AC4J0LDN397\detail_data-r-00000.gz')
+    a = gbt32960parser(r'D:\OBS_2345\detail_data-r-00000.gz')
 
     a.conv2array()
 
@@ -361,7 +357,7 @@ if __name__ == '__main__':
 
     a.dataPreProc()
 
-    a.printLog('dataReadLog_' + datetime.datetime.now().strftime("%Y%m%d_%H%M%S") + '.log')
+    # a.printLog('dataReadLog_' + datetime.datetime.now().strftime("%Y%m%d_%H%M%S") + '.log')
 
     a.dataOutput()
     
