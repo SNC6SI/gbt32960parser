@@ -6,3 +6,9 @@ gbt32960parser/sort_0327
 gbt32960parser/oldcompletefiles
 gbt32960parser/*.csv
 gbt32960parser/*.log
+gbt32960parser/data_analyse
+gbt32960parser/mergevin
+*.txt
+*.pyproj
+*.zip
+gbt32960parser/chaos

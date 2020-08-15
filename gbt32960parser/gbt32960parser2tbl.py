@@ -331,7 +331,7 @@ class gbt32960parser:
         if self.cellTNum == 0:
             self.cellTNum = 72
         for i in range(self.cellTNum):
-            cellTListName.append('T' + str(i))
+            cellTListName.append('T' + str(i))  
         df_cellT = pd.DataFrame(self.Info_7, columns=cellTListName)
         
         # concat
@@ -349,7 +349,7 @@ class gbt32960parser:
 if __name__ == '__main__':
 
     #a = gbt32960parser(r'D:\OBS\data201903\LA9AB2AC6H0LDN511\detail_data-r-00000.gz')
-    a = gbt32960parser(r'D:\OBS\data201810\LB9AB2AC8H0LDN156\test.txt')
+    a = gbt32960parser(r'D:\85_obs\data201903\LA9AB2AC4J0LDN397\detail_data-r-00000.gz')
 
     a.conv2array()
 
