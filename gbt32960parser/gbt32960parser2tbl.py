@@ -211,7 +211,7 @@ class gbt32960parser:
                     elif item[idxHead]==0x07:
                         self.Info_5[i, 0]   = item[idxHead+1] # highest fault lvl
                         self.Info_5[i, 1]   = item[idxHead+2]<<24 | item[idxHead+3]<<16 | item[idxHead+4]<<8 | item[idxHead+5] # fault flag collection
-                        self.Info_5[i, 6]   = (item[idxHead+3]>>3)&(0x01)
+                        self.Info_5[i, 6]   = (item[idxHead+4]>>3)&(0x01)
                         self.Info_5[i, 2]   = item[idxHead+6] # total fault num of pack
                         tmp = self.Info_5[i, 2] * 4
                         self.Info_5[i, 3]   = item[idxHead + 7 + tmp] # total fault num of TM
