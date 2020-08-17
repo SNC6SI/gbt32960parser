@@ -13,6 +13,7 @@ from gbt32960parser2tbl import gbt32960parser as gb3p
 
 
 if __name__ == "__main__":
+    print('preparing...')
     vins = ['LB9AB2AC8H0LDN156',
             'LB9AB2AC0H0LDN264',
             'LB9AB2AC2H0LDN136']
@@ -31,8 +32,9 @@ if __name__ == "__main__":
             file_rc = glob(rc)
             file_dict[vin].extend(file_rc)
 
-    output_root_dir = r'D:\OBS_corrosion'
+    output_root_dir = r'D:\OBS_corrosion_IR_low'
 
+    print('parsing...')
     # parse
     dfs  = {}
     for vin, file_list in file_dict.items():
@@ -47,6 +49,7 @@ if __name__ == "__main__":
 
     # concat and write
     for vin, df_list in dfs.items():
+        print('concating...')
         df2write = pd.concat(df_list, axis=0, ignore_index=True)
         df2write.sort_values(by='time', ignore_index=True, inplace=True)
         # write path
@@ -54,4 +57,5 @@ if __name__ == "__main__":
         if not os.path.exists(filepath):
             os.makedirs(filepath)
         file2write = os.path.join(filepath, 'data.gz')
+        print('writing...')
         df2write.to_csv(file2write, compression='gzip', index=False)

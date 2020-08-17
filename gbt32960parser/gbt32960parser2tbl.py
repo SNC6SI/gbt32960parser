@@ -136,7 +136,7 @@ class gbt32960parser:
         # EXTREMUM
         self.Info_4 = np.full((self.msgArray.shape[0],12),np.nan, dtype = 'float32')
         # WARN
-        self.Info_5 = np.full((self.msgArray.shape[0],6), np.nan, dtype = 'uint32')
+        self.Info_5 = np.full((self.msgArray.shape[0],7), np.nan, dtype = 'uint32')
         # CELL U
         self.Info_6 = np.full((self.msgArray.shape[0],144),np.nan, dtype = 'float32') #92 create a bigger array first and resize in first loop
         # CELL T
@@ -211,6 +211,7 @@ class gbt32960parser:
                     elif item[idxHead]==0x07:
                         self.Info_5[i, 0]   = item[idxHead+1] # highest fault lvl
                         self.Info_5[i, 1]   = item[idxHead+2]<<24 | item[idxHead+3]<<16 | item[idxHead+4]<<8 | item[idxHead+5] # fault flag collection
+                        self.Info_5[i, 6]   = (item[idxHead+3]>>3)&(0x01)
                         self.Info_5[i, 2]   = item[idxHead+6] # total fault num of pack
                         tmp = self.Info_5[i, 2] * 4
                         self.Info_5[i, 3]   = item[idxHead + 7 + tmp] # total fault num of TM
@@ -287,6 +288,7 @@ class gbt32960parser:
         df_packU = pd.DataFrame(self.Info_1[:,5].astype(np.float32)/10.0,columns=['packU'])
         df_packI = pd.DataFrame(self.Info_1[:,6].astype(np.float32)/10.0-1000.0,columns=['packI'])
         df_IR = pd.DataFrame(self.Info_1[:, 10].astype(np.float32), columns=['IR'])
+        df_IR_low = pd.DataFrame(self.Info_5[:, 6].astype(np.uint32), columns=['IR_low'])
         
         df_TMst = pd.DataFrame(self.Info_2[:,2],columns=['TMst'])
         df_TMn = pd.DataFrame(self.Info_2[:,4]-20000,columns=['TMn'])
@@ -332,7 +334,7 @@ class gbt32960parser:
         # concat
         self.df = pd.concat([df_time, 
                              df_vehst,df_chrgst,df_vel,df_odo,df_packU,df_packI,
-                             df_IR,
+                             df_IR,df_IR_low,
                              df_TMst,df_TMn,df_TMtrq,df_MCUT,df_TMT,
                              df_posLong,df_posLati,
                              df_U_Hi,df_U_Lo,df_U_HiN,df_U_LoN,
