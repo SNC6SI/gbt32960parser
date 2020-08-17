@@ -32,7 +32,7 @@ if __name__ == "__main__":
             file_rc = glob(rc)
             file_dict[vin].extend(file_rc)
 
-    output_root_dir = r'D:\OBS_corrosion_IR_low'
+    output_root_dir = r'D:\OBS_corrosion_IR_low_re_1'
 
     print('parsing...')
     # parse
@@ -59,3 +59,5 @@ if __name__ == "__main__":
         file2write = os.path.join(filepath, 'data.gz')
         print('writing...')
         df2write.to_csv(file2write, compression='gzip', index=False)
+
+    os._exit(0)
